@@ -106,6 +106,30 @@ for (let copy of copy_text) {
 }
 
 
+// copy part 
+
+const copyButtons = document.querySelectorAll(".copy-text");
+
+copyButtons.forEach(button => {
+  button.addEventListener("click", function () {
+    
+    const card = button.closest(".card");
+    const textToCopy = card.querySelector(".message-number").textContent;
+    navigator.clipboard.writeText(textToCopy)
+    //   .then(() => {
+    //     alert(`Copied to clipboard: ${textToCopy}`);
+    //   })
+      .catch(err => {
+        console.error("Failed to copy: ", err);
+      });
+  });
+});
+
+
+
+
+
+
 
 
 
