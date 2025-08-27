@@ -21,16 +21,22 @@ const cards = document.getElementsByClassName("card-find");
 const card_id = document.getElementById("card");
 
 let value = parseInt(card_id.textContent);
-let save_data = []; // history array
-
-const clear_button = document.getElementById("clear-button");
+let save_data = []; 
 
 for (let card of cards) {
     card.addEventListener('click', function (e) {
         e.preventDefault();
 
+        if(value < 20){
+            alert("❌ You don’t have enough coins; making a call requires at least 20 coins.");
+            return;
+        }
+
         let parentCard = card.closest(".parent");
         let message_value = parentCard.querySelector(".message-value").textContent;
+
+        let message_title = parentCard.querySelector(".message-title").textContent;
+
         let message_number = parentCard.querySelector(".message-number").textContent;
 
         value -= 20;
@@ -38,19 +44,17 @@ for (let card of cards) {
 
         alert("📞 " + message_value + " " + message_number);
 
-        console.log("clicked", card, "New Value:", value);
 
-        // extra code
+        // History part
         const data = {
-            name: message_value,
+            name: message_title,
             amount: message_number,
             date: new Date().toLocaleTimeString()
         };
 
         save_data.push(data);
 
-        // also render immediately
-        const transactionPart = document.getElementById("transaction-part");
+        const transactionPart = document.getElementById("history-add");
         const div = document.createElement("div");
         div.innerHTML = `
             <div class="bg-[#f4f5f7] rounded-xl p-3 flex justify-between items-center mb-3">
@@ -72,45 +76,36 @@ for (let card of cards) {
     });
 }
 
+// remove history
+const clear_button = document.getElementById("clear-button");
 clear_button.addEventListener("click", function () {
-    // 1) array clear
     save_data = [];
-
-    // 2) UI clear
-    const transactionPart = document.getElementById("transaction-part");
-    transactionPart.innerHTML = "";
-
-    console.log("History cleared!");
+    const history_delete = document.getElementById("history-add");
+    history_delete.innerHTML = "";
 });
 
+// copy part
+
+const copy_text = document.getElementsByClassName("copy-text");
+const copy_value = document.getElementById("copy-value");
+
+let count_value = 0;
+
+for (let copy of copy_text) {
+    copy.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        let parentCard = copy.closest(".parent");
+        let message_number = parentCard.querySelector(".message-number").textContent;
+        alert("Number has been copied. " + message_number);
+
+        count_value++;
+        copy_value.textContent = count_value;
+
+    });
+}
 
 
-
-// const cards = document.getElementsByClassName("card-find");
-// const card_id = document.getElementById("card");
-
-// let value = parseInt(card_id.textContent);
-
-// for (let card of cards) {
-//     card.addEventListener('click', function(e) {
-//         e.preventDefault();
-
-//         let parentCard = card.closest(".parent");
-//         let message_value = parentCard.querySelector(".message-value").textContent;
-//         let message_number = parentCard.querySelector(".message-number").textContent;
-
-//         value -= 20;
-//         card_id.textContent = value;
-
-//         alert(" 📞 " + message_value + " " + message_number);
-
-//         console.log("clicked", card, "New Value:", value);
-
-//         // extra code
-
-
-//     });
-// }
 
 
 
