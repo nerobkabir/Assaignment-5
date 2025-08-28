@@ -25,6 +25,7 @@ document.body.appendChild(div);
 
 
 
+
 3. What is Event Bubbling and how does it work?
 
 Answer : Event Bubbling:
