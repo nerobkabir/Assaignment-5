@@ -116,9 +116,6 @@ copyButtons.forEach(button => {
     const card = button.closest(".card");
     const textToCopy = card.querySelector(".message-number").textContent;
     navigator.clipboard.writeText(textToCopy)
-    //   .then(() => {
-    //     alert(`Copied to clipboard: ${textToCopy}`);
-    //   })
       .catch(err => {
         console.error("Failed to copy: ", err);
       });
