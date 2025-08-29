@@ -32,7 +32,7 @@ Answer : Event Delegation:
 
 Attaching an event listener to a parent element to handle events on its child elements using bubbling.
 
-✅ Useful for performance and handling dynamically added elements.
+Useful for performance and handling dynamically added elements.
 
 ## 5. What is the difference between **preventDefault() and stopPropagation()** methods?
 
